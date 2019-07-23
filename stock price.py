@@ -35,5 +35,7 @@ elif A_yesterday_avg < B_yesterday_avg and A_today_avg > B_today_avg:
     Result = 'Selling signal'
 else:
     Result = 'Buying signal'
-    
+
+# add a line to print data
+print(data.Adj_Close.tail(day))    
 print(Result)
