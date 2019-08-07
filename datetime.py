@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jul 16 15:31:46 2019
+Created on Tue Jul 23 16:48:17 2019
 
 @author: ruiqing
 """
-
 import quandl
 quandl.read_key()
 quandl.ApiConfig.api_key = quandl.ApiConfig.api_key
@@ -30,6 +29,7 @@ def trading_signal(stiker):
         Result = 'Selling signal'
     else:
         Result = 'Buying signal'
+    print(Result)
     return Result
 
 from datetime import date
@@ -44,24 +44,7 @@ if today == "Saturday" or today == "Sunday":
 else:
     date_result = "Trading day"
 
-
 # entering the stiker name and check whether there is a trading signal
 stiker = input("Please enter the stock you want to check")
-Result = "Today is not a trading day"
 if date_result == "Trading day":
-    Result = trading_signal(stiker)
-    print(Result)
-  
-from twilio.rest import Client
-
-import config
-
-
-client = Client(config.account_sid, config.auth_token)
-
-message = client.messages \
-                .create(
-                     body=Result,
-                     from_='+12267985353',
-                     to='+16478718675'
-                 )
+    trading_signal(stiker)
