@@ -42,7 +42,7 @@ else:
 print(data.Adj_Close.tail(day))    
 print(Result)
 
-
+  
 from twilio.rest import Client
 
 import config
@@ -52,7 +52,7 @@ client = Client(config.account_sid, config.auth_token)
 
 message = client.messages \
                 .create(
-                     body=str(data.Adj_Close.tail(day))+Result,
+                     body=Result,
                      from_='+12267985353',
                      to='+16478718675'
                  )
