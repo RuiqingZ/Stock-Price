@@ -6,6 +6,7 @@ Created on Tue Jul 16 15:31:46 2019
 @author: ruiqing
 """
 import quandl
+quandl.read_key()
 quandl.ApiConfig.api_key = quandl.ApiConfig.api_key
 data = quandl.get('EOD/MSFT')
 
@@ -36,6 +37,23 @@ elif A_yesterday_avg < B_yesterday_avg and A_today_avg > B_today_avg:
 else:
     Result = 'Buying signal'
 
+
 # add a line to print data
 print(data.Adj_Close.tail(day))    
 print(Result)
+
+
+from twilio.rest import Client
+
+import config
+
+
+client = Client(config.account_sid, config.auth_token)
+
+message = client.messages \
+                .create(
+                     body=str(data.Adj_Close.tail(day))+Result,
+                     from_='+12267985353',
+                     to='+16478718675'
+                 )
+
